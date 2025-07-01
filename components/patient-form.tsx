@@ -18,8 +18,15 @@ interface PatientFormProps {
 }
 
 export default function PatientForm({ patient, onSubmit, onCancel }: PatientFormProps) {
+  const now = new Date();
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, "0");
+const sequenceNumber = "01"; // Replace this logic with an actual counter if needed
+
+const caseNo = patient?.caseNo || `CASE${year}-${month}-P${sequenceNumber}`;
+
   const [formData, setFormData] = useState({
-    caseNo: patient?.caseNo || `CASE${Date.now()}`,
+    caseNo: patient?.caseNo || caseNo,
     name: patient?.name || "",
     age: patient?.age || 0,
     gender: patient?.gender || ("Male" as "Male" | "Female" | "Other"),
@@ -240,6 +247,18 @@ export default function PatientForm({ patient, onSubmit, onCancel }: PatientForm
               <CardTitle className="text-lg flex items-center gap-2">💳 Additional Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+             <div>
+                <Label htmlFor="consultantFee" className="text-sm font-medium">
+                  Consultant Fee
+                </Label>
+                <Input
+                  id="consultantFee"
+                  value={formData.payment}
+                  onChange={(e) => handleChange("consultantFee", e.target.value)}
+                  placeholder="Paid amount"
+                  className="mt-1"
+                />
+              </div>
               <div>
                 <Label htmlFor="payment" className="text-sm font-medium">
                   Payment
