@@ -249,7 +249,7 @@ const caseNo = patient?.caseNo || `CASE${year}-${month}-P${sequenceNumber}`;
             <CardContent className="space-y-4">
              <div>
                 <Label htmlFor="consultantFee" className="text-sm font-medium">
-                  Consultant Fee
+                  Consultantion Fees
                 </Label>
                 <Input
                   id="consultantFee"
